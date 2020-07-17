@@ -11,7 +11,10 @@ namespace Cars.Mapper
     {
         public CarsProfile()
         {
-            CreateMap<Car, CarDto>();
+            CreateMap<Car, CarDto>()
+                .ForMember(
+                    dest => dest.Year,
+                    opt => opt.MapFrom(src => src.ManufacturingDate.Year));
         }
     }
 }

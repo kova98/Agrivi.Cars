@@ -8,6 +8,7 @@ namespace Cars.DTO
     {
         public long Id { get; set; }
         public string Model { get; set; }
-        public long ManufacturerId { get; set; }
+        public int Year { get; set; }
+        public ManufacturerDto Manufacturer { get; set; }
     }
 }

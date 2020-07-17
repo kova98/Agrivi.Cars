@@ -15,6 +15,8 @@ namespace Cars.Models
         [MaxLength(100)]
         public string Model { get; set; }
 
+        public DateTimeOffset ManufacturingDate { get; set; }
+
         public Manufacturer Manufacturer { get; set; }
     }
 }
