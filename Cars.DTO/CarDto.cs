@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Cars.DTO
 {
-    class CarDto
+    public class CarDto
     {
         public long Id { get; set; }
         public string Model { get; set; }

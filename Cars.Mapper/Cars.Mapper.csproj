@@ -4,4 +4,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cars.DTO\Cars.DTO.csproj" />
+    <ProjectReference Include="..\Cars.Models\Cars.Models.csproj" />
+  </ItemGroup>
+
 </Project>
