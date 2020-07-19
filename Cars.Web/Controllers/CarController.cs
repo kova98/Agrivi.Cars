@@ -23,14 +23,19 @@ namespace Cars.Web.Controllers
             this.carRepo = carRepo;
         }
 
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(string manufacturerName = "", int page = 1)
         {
             page = page < 1 ? 1 : page;
+            manufacturerName ??= "";
 
-            var carsFromRepo = carRepo.GetAll(page, pageSize);
+            var carsFromRepo = carRepo.GetAll(
+                x => x.Manufacturer.Name.ToUpperInvariant().Contains(manufacturerName.ToUpperInvariant()), 
+                page, 
+                pageSize);
+
             var cars = mapper.Map<IEnumerable<CarDto>>(carsFromRepo);
 
-            return View(new CarsListViewModel { Cars = cars, Page = page });
+            return View(new CarsListViewModel { Cars = cars, Page = page, PageSize = pageSize });
         }
     }
 }

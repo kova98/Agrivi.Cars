@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Cars.Repository
@@ -34,9 +35,11 @@ namespace Cars.Repository
             return car;
         }
 
-        public IEnumerable<Car> GetAll(int page = 1, int pageSize = 10)
+        public IEnumerable<Car> GetAll(Expression<Func<Car, bool>> predicate, int page = 1, int pageSize = 10)
         {
             return cars
+                .AsQueryable()
+                .Where(predicate)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize);
         }

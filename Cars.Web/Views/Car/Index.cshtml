@@ -3,11 +3,31 @@
 @{
     ViewData["Title"] = "Cars";
 }
+<form asp-action="Index">
+    <div class="input-group">
+        <input name="manufacturerName" type="text" class="form-control" placeholder="Manufacturer   " />
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit" >Search</button>
+        </div>
+    </div>
+</form>
 
 <partial name="CarsList" model="Model.Cars" />
 
 <div class="btn-group">
-    <a class="btn btn-primary" asp-action="Index" asp-route-page="@(Model.Page - 1)">Previous</a>
-    <a class="btn btn-primary" asp-action="Index" asp-route-page="@(Model.Page + 1)">Next</a>
+    @if (Model.Page > 1)
+    {
+        <a class="btn btn-primary" asp-action="Index" asp-route-page="@(Model.Page - 1)">Previous</a>
+    }
+    @if (Model.Cars.Count() == Model.PageSize)
+    {
+        <a class="btn btn-primary" asp-action="Index" asp-route-page="@(Model.Page + 1)">Next</a>
+    }
 </div>
+
+<script>
+    function getRouteAttributesString(page, manufacturerName) {
+        return "?page=" + page + "&manufacturerName=" + manufacturerName;
+    }
+</script>
 
