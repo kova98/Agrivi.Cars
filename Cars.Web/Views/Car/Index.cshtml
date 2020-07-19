@@ -1,7 +1,13 @@
-﻿@model IEnumerable<CarDto>
+﻿@model CarsListViewModel
 
 @{
     ViewData["Title"] = "Cars";
 }
 
-<partial name="CarsList" model="Model" />
+<partial name="CarsList" model="Model.Cars" />
+
+<div class="btn-group">
+    <a class="btn btn-primary" asp-action="Index" asp-route-page="@(Model.Page - 1)">Previous</a>
+    <a class="btn btn-primary" asp-action="Index" asp-route-page="@(Model.Page + 1)">Next</a>
+</div>
+
