@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Cars.Repository
 {
-    interface ICarRepository : IRepository<Car>
+    public interface ICarRepository : IRepository<Car>
     {
     }
 }

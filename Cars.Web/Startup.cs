@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Cars.Mapper;
+using Cars.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +29,12 @@ namespace Cars.Web
             services
                 .AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
+
+            //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(c => c.AddProfile<CarsProfile>(), typeof(Startup));
+            services.AddAutoMapper(c => c.AddProfile<ManufacturersProfile>(), typeof(Startup));
+
+            services.AddTransient<ICarRepository, InMemoryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

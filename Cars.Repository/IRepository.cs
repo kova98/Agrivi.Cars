@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Cars.Repository
 {
-    interface IRepository<T>
+    public interface IRepository<T>
     {
         IEnumerable<T> GetAll();
         T Get(long id);
         void Add(T entity);
         void Update(T entity);
-        void Delete(long id);
+        void Remove(long id);
     }
 }

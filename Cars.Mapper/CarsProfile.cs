@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Cars.Mapper
 {
-    class CarsProfile : Profile
+    public class CarsProfile : Profile
     {
         public CarsProfile()
         {
-            CreateMap<Car, CarDto>()
+            CreateMap<Car, CarDto>() 
                 .ForMember(
                     dest => dest.Year,
                     opt => opt.MapFrom(src => src.ManufacturingDate.Year));

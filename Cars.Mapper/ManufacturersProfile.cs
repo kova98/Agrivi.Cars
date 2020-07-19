@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Cars.Mapper
 {
-    class ManufacturersProfile : Profile
+    public class ManufacturersProfile : Profile
     {
         public ManufacturersProfile()
         {
