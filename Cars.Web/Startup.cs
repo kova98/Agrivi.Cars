@@ -34,7 +34,7 @@ namespace Cars.Web
             services.AddAutoMapper(c => c.AddProfile<CarsProfile>(), typeof(Startup));
             services.AddAutoMapper(c => c.AddProfile<ManufacturersProfile>(), typeof(Startup));
 
-            services.AddTransient<ICarRepository, InMemoryRepository>();
+            services.AddSingleton<ICarRepository, InMemoryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

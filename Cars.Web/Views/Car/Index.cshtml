@@ -3,11 +3,21 @@
 @{
     ViewData["Title"] = "Cars";
 }
-<form asp-action="Index">
+<form asp-action="Index" asp-route-page="@Model.Page" asp-route-manufacturerName="@Model.ManufacturerName">
     <div class="input-group">
-        <input name="manufacturerName" type="text" class="form-control" placeholder="Manufacturer   " />
+        <input name="manufacturerName" type="text" class="form-control rounded-right" placeholder="Manufacturer" value="@Model.ManufacturerName"/>
         <div class="input-group-append">
-            <button class="btn btn-primary" type="submit" >Search</button>
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+        <div class="dropdown ml-1">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                Order By
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" asp-action="Index" asp-route-orderBy="year">Year</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
         </div>
     </div>
 </form>
@@ -17,17 +27,16 @@
 <div class="btn-group">
     @if (Model.Page > 1)
     {
-        <a class="btn btn-primary" asp-action="Index" asp-route-page="@(Model.Page - 1)">Previous</a>
+        <a class="btn btn-primary" asp-action="Index" 
+           asp-route-page="@(Model.Page - 1)" 
+           asp-route-orderBy="@Model.OrderBy"
+           asp-route-manufacturerName="@Model.ManufacturerName">Previous</a>
     }
     @if (Model.Cars.Count() == Model.PageSize)
     {
-        <a class="btn btn-primary" asp-action="Index" asp-route-page="@(Model.Page + 1)">Next</a>
+        <a class="btn btn-primary" asp-action="Index" 
+           asp-route-page="@(Model.Page + 1)" 
+           asp-route-orderBy="@Model.OrderBy"
+           asp-route-manufacturerName="@Model.ManufacturerName">Next</a>
     }
 </div>
-
-<script>
-    function getRouteAttributesString(page, manufacturerName) {
-        return "?page=" + page + "&manufacturerName=" + manufacturerName;
-    }
-</script>
-

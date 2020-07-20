@@ -96,5 +96,31 @@ namespace Cars.Repository
         {
             return DateTime.Now.AddYears(random.Next(-20, 0));
         }
+
+        public IEnumerable<Car> GetAll(
+            Expression<Func<Car, bool>> predicate = null, 
+            Func<IQueryable<Car>, IOrderedQueryable<Car>> orderBy = null, 
+            int page = 1, 
+            int pageSize = 10)
+        {
+            var query = cars.AsQueryable();
+
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+
+            var result = query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            return result;
+        }
     }
 }
