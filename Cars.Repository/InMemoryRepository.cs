@@ -7,9 +7,10 @@ using System.Text;
 
 namespace Cars.Repository
 {
-    public class InMemoryRepository : ICarRepository
+    public class InMemoryRepository : ICarRepository, IManufacturerRepository
     {
         private List<Car> cars = new List<Car>();
+        private List<Manufacturer> manufacturers = new List<Manufacturer>();
         Random random = new Random();
 
         public InMemoryRepository()
@@ -19,6 +20,9 @@ namespace Cars.Repository
 
         public void Add(Car car)
         {
+            car.Id = cars.Max(x => x.Id) + 1;
+            car.Manufacturer = manufacturers.Find(x => x.Id == car.Manufacturer.Id);
+
             cars.Add(car);
         }
 
@@ -53,7 +57,7 @@ namespace Cars.Repository
 
         private void PopulateCarsList()
         {
-            var manufacturers = new List<Manufacturer>
+            manufacturers.AddRange(new Manufacturer[]
             {
                 new Manufacturer { Id = 0, Name = "Toyota"},
                 new Manufacturer { Id = 1, Name = "Honda"},
@@ -70,7 +74,7 @@ namespace Cars.Repository
                 new Manufacturer { Id = 12, Name = "Lexus"},
                 new Manufacturer { Id = 13, Name = "Audi"},
                 new Manufacturer { Id = 14, Name = "Ferrari"},
-            };
+            });
 
             cars.AddRange(new Car[]
             {
@@ -90,11 +94,6 @@ namespace Cars.Repository
                 new Car {Id = 13, ManufacturingDate = GetRandomYear(), Model = "Q5", Manufacturer = manufacturers.Find(x=>x.Id == 13)},
                 new Car {Id = 14, ManufacturingDate = GetRandomYear(), Model = "SF90 Stradale", Manufacturer = manufacturers.Find(x=>x.Id == 14)},
             });
-        }
-
-        DateTime GetRandomYear()
-        {
-            return DateTime.Now.AddYears(random.Next(-20, 0));
         }
 
         public IEnumerable<Car> GetAll(
@@ -121,6 +120,31 @@ namespace Cars.Repository
                 .ToList();
 
             return result;
+        }
+
+        public IEnumerable<Manufacturer> GetAll(Expression<Func<Manufacturer, bool>> predicate = null, Func<IQueryable<Manufacturer>, IOrderedQueryable<Manufacturer>> orderBy = null, int page = 1, int pageSize = 10)
+        {
+            return manufacturers;
+        }
+
+        Manufacturer IRepository<Manufacturer>.Get(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(Manufacturer entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Manufacturer entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        DateTime GetRandomYear()
+        {
+            return DateTime.Now.AddYears(random.Next(-20, 0));
         }
     }
 }

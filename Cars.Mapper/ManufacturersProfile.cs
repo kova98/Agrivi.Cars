@@ -12,6 +12,7 @@ namespace Cars.Mapper
         public ManufacturersProfile()
         {
             CreateMap<Manufacturer, ManufacturerDto>();
+            CreateMap<ManufacturerDto, Manufacturer>();
         }
     }
 }

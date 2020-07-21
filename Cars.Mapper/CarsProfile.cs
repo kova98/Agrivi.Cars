@@ -15,6 +15,8 @@ namespace Cars.Mapper
                 .ForMember(
                     dest => dest.Year,
                     opt => opt.MapFrom(src => src.ManufacturingDate.Year));
+
+            CreateMap<CarForCreationDto, Car>();
         }
     }
 }

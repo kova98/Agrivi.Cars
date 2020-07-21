@@ -5,20 +5,27 @@
 }
 <form asp-action="Index" asp-route-page="@Model.Page" asp-route-manufacturerName="@Model.ManufacturerName">
     <div class="input-group">
-        <input name="manufacturerName" type="text" class="form-control rounded-right" placeholder="Manufacturer" value="@Model.ManufacturerName"/>
+        <input name="manufacturerName" type="text" class="form-control" placeholder="Manufacturer" value="@Model.ManufacturerName" />
         <div class="input-group-append">
-            <button class="btn btn-primary" type="submit">Search</button>
+            <button class="btn btn-info rounded-right" type="submit">Search</button>
         </div>
         <div class="dropdown ml-1">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
                 Order By
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" asp-action="Index" asp-route-orderBy="id">Id</a>
                 <a class="dropdown-item" asp-action="Index" asp-route-orderBy="year">Year</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" asp-action="Index" asp-route-orderBy="model">Model</a>
+                <a class="dropdown-item" asp-action="Index" asp-route-orderBy="manufacturer">Manufacturer</a>
             </div>
         </div>
+        <a class="btn btn-success ml-1" asp-action="AddCar">
+            Add Car
+        </a>
+        <a class="btn btn-success ml-1" asp-action="AddManufacturer">
+            Add Manufacturer
+        </a>
     </div>
 </form>
 

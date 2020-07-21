@@ -15,13 +15,15 @@ namespace Cars.Web.Controllers
     {
         private readonly IMapper mapper;
         private readonly ICarRepository carRepo;
+        private readonly IManufacturerRepository manufacturerRepo;
 
         private const int PageSize = 5;
 
-        public CarController(IMapper mapper, ICarRepository carRepo)
+        public CarController(IMapper mapper, ICarRepository carRepo, IManufacturerRepository manufacturerRepo)
         {
             this.mapper = mapper;
             this.carRepo = carRepo;
+            this.manufacturerRepo = manufacturerRepo;
         }
 
         public IActionResult Index(string orderBy = "", string manufacturerName = "", int page = 1)
@@ -47,6 +49,33 @@ namespace Cars.Web.Controllers
             };
 
             return View(viewModel);
+        }
+
+        public IActionResult AddCar()
+        {
+            var manufacturersFromRepo = manufacturerRepo.GetAll();
+            var manufacturersDto = mapper.Map<IEnumerable<ManufacturerDto>>(manufacturersFromRepo);
+
+            var viewModel = new AddCarViewModel
+            {
+                CarDto = new CarForCreationDto(),
+                Manufacturers = manufacturersDto
+            };
+            
+            return View(viewModel);
+        }
+
+        public IActionResult SaveCar(AddCarViewModel viewModel)
+        {
+            var car = mapper.Map<Car>(viewModel.CarDto);
+            carRepo.Add(car);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult AddManufacturer()
+        {
+            return View();
         }
 
         private Func<IQueryable<Car>, IOrderedQueryable<Car>> GetOrderByDelegate(string orderBy)
