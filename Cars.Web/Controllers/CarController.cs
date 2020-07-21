@@ -16,7 +16,7 @@ namespace Cars.Web.Controllers
         private readonly IMapper mapper;
         private readonly ICarRepository carRepo;
 
-        private int pageSize = 5;
+        private const int PageSize = 5;
 
         public CarController(IMapper mapper, ICarRepository carRepo)
         {
@@ -33,7 +33,7 @@ namespace Cars.Web.Controllers
                 x => x.Manufacturer.Name.ToUpperInvariant().Contains(manufacturerName.ToUpperInvariant()),
                 GetOrderByDelegate(orderBy),
                 page,
-                pageSize);
+                PageSize);
 
             var cars = mapper.Map<IEnumerable<CarDto>>(carsFromRepo);
 
@@ -41,7 +41,7 @@ namespace Cars.Web.Controllers
             { 
                 Cars = cars, 
                 Page = page, 
-                PageSize = pageSize, 
+                PageSize = PageSize, 
                 ManufacturerName = manufacturerName,
                 OrderBy = orderBy
             };
@@ -55,7 +55,7 @@ namespace Cars.Web.Controllers
             {
                 "model"         => x => x.OrderBy(x => x.Model),
                 "year"          => x => x.OrderBy(x => x.ManufacturingDate),
-                "manufacturer"  => x => x.OrderBy(x => x.Manufacturer),
+                "manufacturer"  => x => x.OrderBy(x => x.Manufacturer.Name),
                 _               => x => x.OrderBy(x => x.Id)
             };
         }
