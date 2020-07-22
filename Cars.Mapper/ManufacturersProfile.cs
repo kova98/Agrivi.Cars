@@ -15,6 +15,8 @@ namespace Cars.Mapper
             CreateMap<Manufacturer, ManufacturerDto>();
             CreateMap<ManufacturerDto, Manufacturer>();
             CreateMap<ManufacturerForCreationDto, Manufacturer>();
+            CreateMap<Manufacturer, ManufacturerForUpdateDto>();
+            CreateMap<ManufacturerForUpdateDto, Manufacturer>();
         }
     }
 }

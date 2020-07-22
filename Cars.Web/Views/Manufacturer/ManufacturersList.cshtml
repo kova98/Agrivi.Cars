@@ -4,14 +4,17 @@
     <thead>
         <tr>
             <th>
+                Id
+            </th>
+            <th>
                 Name
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var manufacturer in Model.Manufacturers) {
         <tr>
+            <th scope="row">@manufacturer.Id</th>
             <td>
                 @manufacturer.Name
             </td>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Cars.DTO.Manufacturer
 {
-    public class ManufacturerForUpdateDto
+    public class ManufacturerForUpdateDto : ManufacturerForManipulationDto
     {
     }
 }

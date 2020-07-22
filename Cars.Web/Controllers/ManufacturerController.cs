@@ -56,5 +56,28 @@ namespace Cars.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult EditManufacturer(long id)
+        {
+            var manufacturer = manufacturerRepo.Get(id);
+            var manufacturerDto = mapper.Map<ManufacturerForUpdateDto>(manufacturer);
+
+            var viewModel = new EditManufacturerViewModel
+            {
+                ManufacturerDto = manufacturerDto,
+                ManufacturerId = id
+            };
+
+            return View(viewModel);
+        }
+
+        public IActionResult UpdateManufacturer(EditManufacturerViewModel viewModel)
+        {
+            var manufacturer = mapper.Map<Manufacturer>(viewModel.ManufacturerDto);
+            manufacturer.Id = viewModel.ManufacturerId;
+
+            manufacturerRepo.Update(manufacturer);
+
+            return RedirectToAction("Index");
+        }
     }
 }

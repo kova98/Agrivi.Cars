@@ -133,7 +133,9 @@ namespace Cars.Repository
 
         Manufacturer IRepository<Manufacturer>.Get(long id)
         {
-            throw new NotImplementedException();
+            var manufacturer = manufacturers.Find(x => x.Id == id);
+
+            return manufacturer;
         }
 
         public void Add(Manufacturer manufacturer)
@@ -143,9 +145,11 @@ namespace Cars.Repository
             manufacturers.Add(manufacturer);
         }
 
-        public void Update(Manufacturer entity)
+        public void Update(Manufacturer manufacturer)
         {
-            throw new NotImplementedException();
+            var manufacturerToUpdate = manufacturers.Find(x => x.Id == manufacturer.Id);
+
+            manufacturerToUpdate.Name = manufacturer.Name;
         }
 
         DateTime GetRandomYear()
