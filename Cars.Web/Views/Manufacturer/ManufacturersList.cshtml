@@ -1,7 +1,5 @@
 ﻿@model ManufacturersListViewModel
 
-<h4>Manufacturers</h4>
-<br />
 <table class="table">
     <thead>
         <tr>
@@ -29,13 +27,13 @@
 <div class="btn-group">
     @if (Model.Page > 1)
     {
-        <a class="btn btn-primary" asp-action="ManufacturersList" asp-controller="Manufacturer" asp-route-page="@(Model.Page - 1)">
+        <a class="btn btn-primary" asp-action="Index" asp-controller="Manufacturer" asp-route-page="@(Model.Page - 1)">
             Previous
         </a>
     }
     @if (Model.Manufacturers.Count() == Model.PageSize)
     {
-        <a class="btn btn-primary" asp-action="ManufacturersList" asp-controller="Manufacturer" asp-route-page="@(Model.Page + 1)">
+        <a class="btn btn-primary" asp-action="Index" asp-controller="Manufacturer" asp-route-page="@(Model.Page + 1)">
             Next
         </a>
     }

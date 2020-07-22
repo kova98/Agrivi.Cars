@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Cars.DTO;
 using Cars.DTO.Manufacturer;
+using Cars.Models;
 using Cars.Repository;
 using Cars.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ namespace Cars.Web.Controllers
             this.mapper = mapper;
         }
 
-        public IActionResult ManufacturersList(int page = 1)
+        public IActionResult Index(int page = 1)
         {
             page = page < 1 ? 1 : page;
 
@@ -43,7 +44,16 @@ namespace Cars.Web.Controllers
 
         public IActionResult AddManufacturer()
         {
-            return View();
+            return View(new ManufacturerForCreationDto());
+        }
+
+        public IActionResult SaveManufacturer(ManufacturerForCreationDto manufacturerDto)
+        {
+            var manufacturer = mapper.Map<Manufacturer>(manufacturerDto);
+
+            manufacturerRepo.Add(manufacturer);
+
+            return RedirectToAction("Index");
         }
 
     }

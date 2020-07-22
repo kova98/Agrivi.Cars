@@ -136,9 +136,11 @@ namespace Cars.Repository
             throw new NotImplementedException();
         }
 
-        public void Add(Manufacturer entity)
+        public void Add(Manufacturer manufacturer)
         {
-            throw new NotImplementedException();
+            manufacturer.Id = manufacturers.Max(x => x.Id) + 1;
+
+            manufacturers.Add(manufacturer);
         }
 
         public void Update(Manufacturer entity)
