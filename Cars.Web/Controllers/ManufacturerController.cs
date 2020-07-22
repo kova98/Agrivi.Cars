@@ -79,5 +79,12 @@ namespace Cars.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult RemoveManufacturer(long id)
+        {
+            manufacturerRepo.Remove(id);
+
+            return RedirectToAction("Index");
+        }
     }
 }
