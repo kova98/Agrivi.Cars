@@ -73,6 +73,13 @@ namespace Cars.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult RemoveCar(long id)
+        {
+            carRepo.Remove(id);
+
+            return RedirectToAction("Index");
+        }
+
         public IActionResult AddManufacturer()
         {
             return View();

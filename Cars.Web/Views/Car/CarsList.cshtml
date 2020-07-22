@@ -17,6 +17,7 @@
                 <td>@car.Model</td>
                 <td>@car.Manufacturer.Name</td>
                 <td>@car.Year</td>
+                <td><a asp-action="RemoveCar" asp-route-id="@car.Id">Remove</a></td>
             </tr>
         }
     </tbody>
