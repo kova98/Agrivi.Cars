@@ -17,7 +17,10 @@
                 <td>@car.Model</td>
                 <td>@car.Manufacturer.Name</td>
                 <td>@car.Year</td>
-                <td><a asp-action="RemoveCar" asp-route-id="@car.Id">Remove</a></td>
+                <td>
+                    <a asp-action="RemoveCar" asp-route-id="@car.Id" class="mr-3">Remove</a>
+                    <a asp-action="EditCar" asp-route-id="@car.Id">Edit</a>
+                </td>
             </tr>
         }
     </tbody>

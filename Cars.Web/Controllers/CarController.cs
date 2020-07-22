@@ -80,6 +80,34 @@ namespace Cars.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult EditCar(long id)
+        {
+            var carToUpdate = carRepo.Get(id);
+            var carToUpdateDto = mapper.Map<CarForUpdateDto>(carToUpdate);
+
+            var manufacturersFromRepo = manufacturerRepo.GetAll();
+            var manufacturersDto = mapper.Map<IEnumerable<ManufacturerDto>>(manufacturersFromRepo);
+
+            var viewModel = new EditCarViewModel
+            {
+                CarId = id,
+                CarDto = carToUpdateDto,
+                Manufacturers = manufacturersDto
+            };
+
+            return View(viewModel);
+        }
+
+        public IActionResult UpdateCar(EditCarViewModel viewModel)
+        {
+            var car = mapper.Map<Car>(viewModel.CarDto);
+            car.Id = viewModel.CarId;
+
+            carRepo.Update(car);
+
+            return RedirectToAction("Index");
+        }
+
         public IActionResult AddManufacturer()
         {
             return View();

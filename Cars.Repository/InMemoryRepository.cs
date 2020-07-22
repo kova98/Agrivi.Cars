@@ -50,9 +50,11 @@ namespace Cars.Repository
 
         public void Update(Car car)
         {
+            car.Manufacturer = manufacturers.Find(x => x.Id == car.Manufacturer.Id);
             var carToUpdate = cars.Find(x=>x.Id == car.Id);
 
-            carToUpdate = car;
+            cars.Remove(carToUpdate);
+            cars.Add(car);
         }
 
         private void PopulateCarsList()

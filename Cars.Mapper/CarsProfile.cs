@@ -17,6 +17,9 @@ namespace Cars.Mapper
                     opt => opt.MapFrom(src => src.ManufacturingDate.Year));
 
             CreateMap<CarForCreationDto, Car>();
+
+            CreateMap<CarForUpdateDto, Car>();
+            CreateMap<Car, CarForUpdateDto>();
         }
     }
 }

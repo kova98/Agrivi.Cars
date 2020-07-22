@@ -5,10 +5,7 @@ using System.Text;
 
 namespace Cars.DTO
 {
-    public class CarForCreationDto
+    public class CarForCreationDto : CarForManipulationDto
     {
-        public string Model { get; set; }
-        public DateTimeOffset ManufacturingDate { get; set; }
-        public ManufacturerDto Manufacturer { get; set; }
     }
 }
