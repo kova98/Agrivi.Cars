@@ -1,0 +1,42 @@
+﻿@model ManufacturersListViewModel
+
+<h4>Manufacturers</h4>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var manufacturer in Model.Manufacturers) {
+        <tr>
+            <td>
+                @manufacturer.Name
+            </td>
+            <td>
+                <a asp-action="RemoveManufacturer" asp-route-id="@manufacturer.Id" class="mr-3">Remove</a>
+                <a asp-action="EditManufacturer" asp-route-id="@manufacturer.Id">Edit</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="btn-group">
+    @if (Model.Page > 1)
+    {
+        <a class="btn btn-primary" asp-action="ManufacturersList" asp-controller="Manufacturer" asp-route-page="@(Model.Page - 1)">
+            Previous
+        </a>
+    }
+    @if (Model.Manufacturers.Count() == Model.PageSize)
+    {
+        <a class="btn btn-primary" asp-action="ManufacturersList" asp-controller="Manufacturer" asp-route-page="@(Model.Page + 1)">
+            Next
+        </a>
+    }
+</div>

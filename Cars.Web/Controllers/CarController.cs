@@ -108,11 +108,6 @@ namespace Cars.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult AddManufacturer()
-        {
-            return View();
-        }
-
         private Func<IQueryable<Car>, IOrderedQueryable<Car>> GetOrderByDelegate(string orderBy)
         {
             return orderBy switch

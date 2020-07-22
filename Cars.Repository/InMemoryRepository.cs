@@ -126,7 +126,9 @@ namespace Cars.Repository
 
         public IEnumerable<Manufacturer> GetAll(Expression<Func<Manufacturer, bool>> predicate = null, Func<IQueryable<Manufacturer>, IOrderedQueryable<Manufacturer>> orderBy = null, int page = 1, int pageSize = 10)
         {
-            return manufacturers;
+            return manufacturers
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
         }
 
         Manufacturer IRepository<Manufacturer>.Get(long id)
