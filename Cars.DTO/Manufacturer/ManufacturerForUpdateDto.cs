@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cars.DTO
+namespace Cars.DTO.Manufacturer
 {
-    public class CarForUpdateDto : CarForManipulationDto
+    class ManufacturerForUpdateDto
     {
     }
 }

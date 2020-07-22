@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Cars.DTO;
+using Cars.DTO.Manufacturer;
 using Cars.Repository;
 using Cars.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;

@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cars.DTO
+namespace Cars.DTO.Manufacturer
 {
-    public class ManufacturerDto
+    class ManufacturerForManipulationDto
     {
-        public long Id { get; set; }
         public string Name { get; set; }
     }
 }

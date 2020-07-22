@@ -1,4 +1,5 @@
 ﻿using Cars.DTO;
+using Cars.DTO.Manufacturer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
