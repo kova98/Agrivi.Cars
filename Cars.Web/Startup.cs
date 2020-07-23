@@ -8,6 +8,8 @@ using Cars.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +28,15 @@ namespace Cars.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(
+                    @"Server=(localdb)\mssqllocaldb;Database=Cars;Trusted_Connection=True;integrated security=False;",
+                    options => options
+                        .EnableRetryOnFailure()
+                        .MigrationsAssembly("Cars.Repository"));
+            });
+
             services
                 .AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
@@ -34,8 +45,8 @@ namespace Cars.Web
             services.AddAutoMapper(c => c.AddProfile<CarsProfile>(), typeof(Startup));
             services.AddAutoMapper(c => c.AddProfile<ManufacturersProfile>(), typeof(Startup));
 
-            services.AddSingleton<ICarRepository, InMemoryRepository>();
-            services.AddSingleton<IManufacturerRepository, InMemoryRepository>();
+            services.AddScoped<ICarRepository, CarRepository>();
+            services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +68,7 @@ namespace Cars.Web
             app.UseRouting();
 
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -12,7 +12,8 @@ namespace Cars.Repository
             Expression<Func<T, bool>> predicate = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, 
             int page = 1, 
-            int pageSize = 10);
+            int pageSize = 10,
+            params Expression<Func<T, object>>[] include);
         T Get(long id);
         void Add(T entity);
         void Update(T entity);

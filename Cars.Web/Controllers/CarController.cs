@@ -34,10 +34,11 @@ namespace Cars.Web.Controllers
             manufacturerName ??= "";
 
             var carsFromRepo = carRepo.GetAll(
-                x => x.Manufacturer.Name.ToUpperInvariant().Contains(manufacturerName.ToUpperInvariant()),
+                x => x.Manufacturer.Name.ToUpper().Contains(manufacturerName.ToUpper()),
                 GetOrderByDelegate(orderBy),
                 page,
-                PageSize);
+                PageSize,
+                x => x.Manufacturer);
 
             var cars = mapper.Map<IEnumerable<CarDto>>(carsFromRepo);
 
@@ -70,6 +71,8 @@ namespace Cars.Web.Controllers
         public IActionResult SaveCar(AddCarViewModel viewModel)
         {
             var car = mapper.Map<Car>(viewModel.CarDto);
+            car.Manufacturer = manufacturerRepo.Get(car.Manufacturer.Id);
+            
             carRepo.Add(car);
 
             return RedirectToAction("Index");

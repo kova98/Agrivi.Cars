@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Cars.Models
 {
-    public class Car
+    public class Car : IEntity
     {
         [Key]
         public long Id { get; set; }

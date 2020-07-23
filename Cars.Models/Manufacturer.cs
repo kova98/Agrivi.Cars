@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Cars.Models
 {
-    public class Manufacturer
+    public class Manufacturer : IEntity
     {
         [Key]
         public long Id { get; set; }
