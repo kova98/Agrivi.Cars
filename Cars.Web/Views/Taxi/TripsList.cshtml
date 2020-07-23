@@ -1,0 +1,48 @@
+﻿@model TripsListViewModel
+
+<div class="row">
+    <div class="col-6">
+        <h4>All Trips</h4>
+        <table class="table table-borderless">
+            <thead class="border-bottom">
+                <tr>
+                    <th scope="col">Taxi</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var trip in Model.AllTrips)
+                {
+                    <tr>
+                        <td>@trip.Taxi.Name</td>
+                        <td>@trip.Customer.Name</td>
+                        <td>@trip.Price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-6">
+        <h4>Best Trips</h4>
+        <table class="table table-borderless">
+            <thead class="border-bottom">
+                <tr>
+                    <th scope="col">Taxi</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var trip in Model.BestTrips)
+                {
+                    <tr>
+                        <td>@trip.Taxi.Name</td>
+                        <td>@trip.Customer.Name</td>
+                        <td>@trip.Price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
